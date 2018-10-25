@@ -1,0 +1,37 @@
+import javax.swing.*;
+public class Player {
+Card[] hand;
+private double balance;
+public Player() {
+	
+}
+//constructor
+public Player(Card one, Card two) {
+	Card[] fun = {one,two};
+	hand = fun;
+}
+//sets the player's hand as an array of Card objects
+public void setHand(Card[] in) {
+	hand = in;
+}
+//returns player's hand as an array of Card objects
+public Card[] getHand() {
+	return hand;
+}
+//prints player's hand
+public void showHand() {
+	String mess = "";
+	for(Card x : hand) {
+		mess += x.printCard() + "\n";
+	}
+	JOptionPane.showMessageDialog(null, mess, "Cupid's Casino, Your Hand:", 1);
+}
+//will set the player's balance
+public void setBalance(double in) {
+	balance = in;
+}
+//returns player's balance
+public double getBalance() {
+	return balance;
+}
+}
