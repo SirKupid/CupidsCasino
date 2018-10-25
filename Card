@@ -1,0 +1,30 @@
+public class Card {
+private String suit, value;
+
+public Card() {
+	suit = null;
+	value = null;
+}
+public Card(String s, String v) {
+	suit = s;
+	value = v;
+}
+public String getSuit() {
+	return suit;
+}
+public void setSuit(String suit) {
+	this.suit = suit;
+}
+public String getValue() {
+	return value;
+}
+public void setValue(String value) {
+	this.value = value;
+}
+
+public String printCard() {
+	/*if(value == 1 || value > 10)
+		return isAFace(value) + suit;*/
+	return value + " of " + suit;
+}
+}
