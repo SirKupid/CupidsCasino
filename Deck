@@ -1,0 +1,108 @@
+import java.util.*;
+public class Deck {
+	
+	public Deck() {
+	}
+	public Deck(ArrayList<Card> in) {
+		deck = in;
+	}
+	public Deck fillDeck() {
+		//Fills Deck with 52 cards excluding Jokers
+		String suit = null;
+		//nested for loop that adds each card to the deck one by one
+		for(int i = 0; i < 4; i++) {
+			for(int x = 1; x < 14; x++) {
+				//adds the spades
+				if(i == 0)
+					suit = "Spades";
+				//adds the diamonds
+				if(i == 1)
+					suit = "Diamonds";
+				//adds the clubs
+				if(i == 2)
+					suit = "Clubs";
+				//adds the hearts
+				if(i==3)
+					suit = "Hearts";
+				//turns each value into a string
+				String val =""+x;
+				//converts face cards from numbers to letters
+				val = makeAFace(val);
+				Card card = new Card(suit, val);
+				deck.add(card);
+			}
+		}
+		Deck one = new Deck(deck);
+		return one;
+	}
+	private ArrayList<Card> deck = new ArrayList<Card>();
+
+	public void shuffle() { 
+		//shuffles the deck
+		 ArrayList<Card> cards = deck;
+		 ArrayList<Card> shuffle = new ArrayList<Card>();
+		 int pos = 0;
+		 for(int i = 0; i < deck.size(); i++) {
+			 pos = (int)(Math.random() * cards.size());
+			 if(shuffle.contains(cards.get(pos))) {
+				 while(shuffle.contains(cards.get(pos))) {
+					 pos = (int)(Math.random() * cards.size());
+				 }
+			 }
+			 shuffle.add(i,cards.get(pos));
+		 }
+		 deck = shuffle;
+	}
+  //will return card on the top of the deck
+	public Card getCard() {
+		Card one = deck.get(0);
+		deck.remove(0);
+		return one;
+	}
+  //gets the card at a specific position in the deck
+	public Card getCard(int pos) {
+		if(pos <= deck.size() && pos >= 0) {
+		Card one = deck.get(pos);
+		deck.remove(pos);
+		return one;
+		}
+		return deck.get(0);
+	}
+  //will return an int that represents the remaining deck size
+	public int getSize() {
+		return deck.size();
+	}
+  //turns all of the cards higher than 10 into face cards
+	public String makeAFace(String v) {
+		if(v.equals("1") || v.equals("14"))
+			return "A";
+		else if(v.equals("11"))
+			return "J";
+		else if(v.equals("12"))
+			return "Q";
+		else if(v.equals("13"))
+			return "K";
+		else
+			return v;
+	}
+  //prints every card in the current deck
+	public void printDeck() {
+		int count = 0;
+		for(Card x : deck) {
+			System.out.print(x.printCard() + " ");
+			count++;
+			if(count % 4 == 0)
+				System.out.println();
+		}
+	}
+	public static void main(String args[]) {
+  //new deck object created
+		Deck one = new Deck();
+    //fills the deck
+		one.fillDeck();
+		//shuffles deck
+		one.shuffle();
+    //prints out the deck components
+		one.printDeck();
+	}
+}
